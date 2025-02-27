@@ -1,6 +1,8 @@
 const User = require('./model')
 const bcrypt = require('bcrypt')
 
+
+
 async function signup(req, res) {
     try {
         const data = req.body;
@@ -24,7 +26,7 @@ async function signup(req, res) {
 
 async function login(req, res) {
     try {
-        const data = req.body;
+        const data = req.body
         const existingUser = await User.findOne({ email: data.email })
         if (existingUser) {
             const isPasswordMatch = await bcrypt.compare(data.password, existingUser.password)
@@ -39,16 +41,8 @@ async function login(req, res) {
             return res.status(400).json({ "message": "No user found with this email" })
         }
     } catch (error) {
-        return res.status(404).json({ "message": error })
+        return res.status(404).json({ "message": "Hello" })
     }
 }
 
-async function check(req, res) {
-    try {
-        res.status(200).json({ "al": req.body, "message": "Working" })
-    } catch (error) {
-        res.status(400).json({ "message": "Not working" })
-    }
-}
-
-module.exports = { signup, login, check }
+module.exports = { signup, login }

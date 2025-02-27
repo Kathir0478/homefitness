@@ -1,1 +1,11 @@
-@import "tailwindcss"
+@import "tailwindcss";
+
+html {
+    background: url('https://hips.hearstapps.com/hmg-prod/images/core-workouts-at-home-1666192539.png') no-repeat center center fixed;
+    background-size: cover;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: xx-large;
+}
