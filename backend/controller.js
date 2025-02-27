@@ -18,7 +18,7 @@ async function signup(req, res) {
             return res.status(200).json({ "message": "Successfully SignedUp" })
         }
     } catch (error) {
-        return res.status(404).json({ "message": error })
+        return res.status(404).json({ "message": "Try again" })
     }
 }
 
@@ -41,6 +41,14 @@ async function login(req, res) {
     } catch (error) {
         return res.status(404).json({ "message": error })
     }
-
 }
-module.exports = { signup, login }
+
+async function check(req, res) {
+    try {
+        res.status(200).json({ "al": req.body, "message": "Working" })
+    } catch (error) {
+        res.status(400).json({ "message": "Not working" })
+    }
+}
+
+module.exports = { signup, login, check }
