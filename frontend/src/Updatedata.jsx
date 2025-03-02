@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom'
 
 const Updatedata = () => {
     const navigate = useNavigate()
-    const getapi = "http://localhost:5000/api/getdata"
-    const setapi = "http://localhost:5000/api/setdata"
+    const API_BASE= "https://homefitness-backend.onrender.com"
+    const getapi = `${API_BASE}/api/getdata`
+    const setapi = `${API_BASE}/api/setdata`
     const [userdata, setUserdata] = useState(null)
     const [moddata, setmoddata] = useState({ name: "", age: 0, gender: '', height: 0, weight: 0, fitlevel: "", goal: "", duration: 0, frequency: 0, description: "" })
     const token = localStorage.getItem("token")
