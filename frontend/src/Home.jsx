@@ -6,7 +6,8 @@ const Home = () => {
     const [user, setUser] = useState("")
     const navigate = useNavigate()
     const [options, showOptions] = useState(false)
-    const api = "http://localhost:5000/api/getdata"
+    const API_BASE= "https://homefitness-backend.onrender.com"
+    const api = `${API_BASE}/api/getdata`
     const token = localStorage.getItem("token")
     async function fetchData() {
         const result = await axios.get(api, {
