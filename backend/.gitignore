@@ -6,17 +6,13 @@ package-lock.json
 .env
 
 # Logs
-logs
+logs/
 *.log
 
-# Build output (if applicable)
-build
-dist
+# Build output
+build/
 
-# Debug & editor-specific files
-.vscode/*
+# System & editor files
+.vscode/
 .idea/
 .DS_Store
-
-# Temporary files
-tmp/
