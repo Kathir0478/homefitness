@@ -4,7 +4,8 @@ import { Link, useNavigate } from 'react-router-dom'
 
 const Signup = () => {
     const navigate = useNavigate();
-    const api = "http://localhost:5000/api/signup"
+    const API_BASE= "https://homefitness-backend.onrender.com"
+    const api = `${API_BASE}/api/signup`
     const [confirm, setConfirm] = useState("")
     const [userdata, setUserdata] = useState({ name: "", email: "", password: "" })
     const handleChange = (event) => {
