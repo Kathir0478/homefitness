@@ -1,24 +1,27 @@
 const express = require('express')
-const router = express.Router()
-const { signup, login } = require('./controller')
+const router = express.Router();
+const { login, signup, getdata, update } = require('./controller')
+
 const jwt = require('jsonwebtoken')
+require('dotenv').config()
 
-
-const verifyToken = (req, res, next) => {
-    const token = req.headers.authorization
+const authorizemid = (req, res, next) => {
+    const token = req.header("Authorization");
     if (!token) {
-        res.json({ "message": "request denied" })
+        return res.status(401).json({ message: "Unauthorized, No Token Provided" });
     }
     try {
-        const payload = jwt.verify(token, process.env.JWT_SECRET_KEY)
-        next()
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        req.user = decoded;
+        next();
+    } catch (error) {
+        return res.status(403).json({ message: "Access denied, Invalid Token" });
     }
-    catch (error) {
-        res.json({ "message": "token expired" })
-    }
-}
+};
 
+router.post("/login", login)
+router.post("/signup", signup)
+router.get("/getdata", authorizemid, getdata)
+router.post("/setdata", authorizemid, update)
 
-router.post('/signup', signup)
-router.post('/login', login)
-module.exports = router
+module.exports = router;

@@ -1,18 +1,21 @@
 import React from 'react'
-import Signup from './Signup'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './Login'
 import Home from './Home'
-import Content from './Content'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
+import Signup from './Signup'
+import Updatedata from './Updatedata'
+import Setdata from './Setdata'
+import Accessdenied from './Accessdenied'
 const App = () => {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/signup' element={<Signup />} />
                 <Route path='/login' element={<Login />} />
-                <Route path='/content' element={<Content />} />
+                <Route path='/signup' element={<Signup />} />
+                <Route path='/updatedata' element={<Updatedata />} />
+                <Route path='/setdata' element={<Setdata />} />
+                <Route path='/error' element={<Accessdenied />} />
             </Routes>
         </BrowserRouter>
     )

@@ -1,57 +1,43 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import routes from './utils/API'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Login = () => {
     const navigate = useNavigate();
-    const [credential, setCredential] = useState({ email: "", password: "" });
-
+    const api = `http://localhost:5000/api/login`
+    const [userdata, setUserdata] = useState({ email: "", password: "" })
     const handleChange = (event) => {
-        setCredential({ ...credential, [event.target.name]: event.target.value });
-    };
-
+        setUserdata({ ...userdata, [event.target.name]: event.target.value })
+    }
     const handleSubmit = async (event) => {
         try {
-            event.preventDefault();
-            const res = await axios.post(routes.loginRoute, credential);
-            navigate('/content');
-        } catch (error) {
-            alert(error.response.data.message);
+            event.preventDefault()
+            const result = await axios.post(api, userdata)
+            localStorage.setItem("token", result.data.token)
+            navigate('/')
         }
-    };
-
+        catch (error) {
+            alert(error.response.data.message)
+        }
+    }
+    const handleReset = () => {
+        setUserdata({ email: "", password: "" })
+    }
     return (
-        <div className="flex flex-col items-center justify-center h-screen w-screen bg-gray-900 text-white">
-            <h1 className="text-3xl font-bold mb-6 text-blue-400">🔐 Login</h1>
-            <div className="bg-gray-800 p-8 rounded-xl shadow-lg w-full max-w-md">
-                <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        name="email"
-                        value={credential.email}
-                        onChange={handleChange}
-                        required
-                        className="w-full p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none"
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        value={credential.password}
-                        onChange={handleChange}
-                        required
-                        className="w-full p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none"
-                    />
-                    <div className="flex justify-between mt-4">
-                        <button type="submit" className="w-1/2 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">Login</button>
-                        <button type="button" className="w-1/2 bg-gray-600 text-white py-2 rounded-lg hover:bg-gray-700 transition" onClick={() => setCredential({ email: "", password: "" })}>Reset</button>
-                    </div>
-                </form>
-            </div>
+        <div className='flex flex-col justify-center gap-10 items-center w-screen h-screen'>
+            <h1>Login</h1>
+            <form onSubmit={handleSubmit} className='flex flex-col justify-around h-120 border-3 rounded-lg p-20 border-sky-400 required:border-red-500'>
+                <p><input type='email' placeholder='Email' name='email' value={userdata.email} onChange={handleChange} className='p-2 outline-none focus:ring-2 focus:ring-blue-400 rounded-lg' required /></p>
+                <p><input type='password' placeholder='Password' name='password' value={userdata.password} onChange={handleChange} className='p-2 outline-none focus:ring-2 focus:ring-blue-400 rounded-lg' required /></p>
+                <div className='flex w-full justify-between p-2'>
+                    <button type='submit' className='border-sky-400 border-2 p-2 rounded-lg'>Submit</button>
+                    <button onClick={handleReset} className='border-sky-400 border-2 p-2 rounded-lg'>Reset</button>
+                </div>
+                <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
+
+            </form>
         </div>
-    );
+    )
 }
 
-export default Login;
+export default Login

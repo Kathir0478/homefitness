@@ -1,11 +1,18 @@
 @import "tailwindcss";
 
 html {
-    background: url('https://hips.hearstapps.com/hmg-prod/images/core-workouts-at-home-1666192539.png') no-repeat center center fixed;
-    background-size: cover;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+    background-color: rgba(0, 0, 0, 0);
+    color: black
+}
+
+h1 {
     font-size: xx-large;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+}
+
+p {
+    font-size: medium;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
 }
